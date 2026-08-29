@@ -1,0 +1,27 @@
+# This is a basic workflow to help you get started with Actions
+name: test readme existence
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show info about the system
+        run: uname -a
+
+      - name: Clone the repository
+        uses: actions/checkout@v7
+
+      - name: Tests readme file existence
+        run: |
+          if test -f README.md; then
+            echo "Test Pass ✅"
+            true
+          else
+            echo "Test Failed ❌"
+            false
+          fi
